@@ -1,0 +1,431 @@
+<html>
+	<head>
+		<script src="processing-1.4.1.js"></script>
+		<script type="text/processing" data-processing-target="mycanvas">
+		var windowWidth = 1340;
+		var windowHeight = 800; 
+		var floor = 200; 
+		var border = 80; 
+		
+		var doorlist;
+		var bricks;
+		var mike;
+		var num; //number for determining brick direction
+		CartList carts;
+		
+		
+		void setup()
+		{
+			size(windowWidth,windowHeight);
+			
+			doorlist = new DoorList(100,6);	
+			bricks= new BrickList(10);
+			mike= new Mike(windowWidth/2,windowHeight/8*5,200);
+			carts = new CartList(6, 550, 200, 100);
+			
+		}
+		
+		
+		void draw()
+		{
+			background(215,215,215);
+			
+			//wall lines
+			strokeWeight(border);
+			stroke(180,180,180);
+		    line(0,0,windowWidth,0);
+			line(0,windowHeight - floor,windowWidth,windowHeight - floor);
+			
+			//floor
+			stroke(100,100,100);
+			strokeWeight(floor * 2);
+			line(0, windowHeight, windowWidth, windowHeight);
+			
+			
+			bricks.drawBricks();
+			doorlist.drawDoors();
+			
+			carts.drawCarts();
+			mike.drawMike();
+			mike.moveMike();
+			
+			
+		}
+		
+		class Door
+		{
+			var speed;
+			var c1;
+			var c2;
+			var c3;
+			var length;
+			var width;
+			var x;
+			var y;
+			
+			Door(s,co1,co2,co3,l,w,X,Y)
+			{
+				speed=s;
+				c1=co1;
+				c2=co2;
+				c3=co3;
+				length=l;
+				width=w;
+				x=X;
+				y=Y;
+			}
+			
+			var getX(){
+			return x; 
+			}
+			
+			var change = random(1, 150); //flash lights
+			var dir = 3; //speed
+			
+			void drawDoor()
+			{
+			
+				stroke(116, 116, 116); //frame
+				strokeWeight(20); 	
+				fill(c1,c2,c3);
+				rect(x,y,length,width); //door
+				strokeWeight(40);
+				line(x+75, y, x+75, 100);//line above the doors
+				noStroke();
+				
+				fill(255, change, change); // changes
+				ellipse(x +75, y, 20, 20);
+				
+				fill(201,180,91);
+				ellipse(x+width/12*5,y+length/12*10,20,20);
+				
+				change += dir; 
+				if(change > 150 || change < 1){
+					dir*= -1; 
+				}
+				
+				
+			}
+			
+			void moveDoor()
+			{
+				x-=speed;
+			}
+		}
+		
+		class DoorList
+		{
+			var height;
+			ArrayList allDoors; 
+			var dooramt;
+			
+			DoorList(h,n)
+			{
+				height=h;
+				dooramt=n;
+				allDoors = new ArrayList <Door> ();
+				for(var i = 0; i < dooramt; i++){
+					allDoors.add(new Door(1, random(255), random(255), random(255), 150, 300, 250 * i, height + 50));
+				}
+			}
+			void drawDoors()
+			{
+				stroke(116, 116, 116);
+				strokeWeight(10);
+				line(0, height, windowWidth, height);
+				strokeWeight(20); 
+			
+				for(var d: allDoors){
+					d.drawDoor();
+					d.moveDoor();
+				}
+				
+			
+			
+			for(var i = 0; i <allDoors.size(); i++){
+				if(allDoors.get(i).getX() < -160){
+					allDoors.remove(i);
+					allDoors.add(new Door(1,random(255),random(255),random(255), 150,300, windowWidth, height + 50));
+					i--;
+					dooramt++;
+				}
+				
+			}
+				
+			
+			}
+		}
+		
+		class Brick
+		{
+			var width;
+			var height;
+			var speed; 
+			var x; var y; 
+			var color = random(50, 255);
+			
+			Brick(xc, yc){
+				x = xc; 
+				y = yc;
+				width = 100; 
+				height = 50; 
+				speed = 0.5; 
+			}
+			
+			var getX(){
+				return x; 
+			}
+			
+			void drawBrick(){
+				noStroke();
+				fill(color, color, color);
+				rect(x, y, width, height);
+				moveBrick();
+			}
+			
+			void moveBrick(){
+			if (num===-1)
+			{
+			 x++; 
+			 if(x > windowWidth){
+				x = -1 * width;
+				y = random(border, windowHeight - border-floor);
+				color = random(50, 255);
+				}
+			 }
+			 else if(num===1)
+			 {
+				x--;
+				 if(x <0){
+				x = windowWidth;
+				y = random(border, windowHeight - border-floor);
+				color = random(50, 255);
+				}
+			 }
+			}
+		}
+		
+		class BrickList
+		{
+			var numBricks;
+			ArrayList brickList;
+			BrickList(num)
+			{
+				numBricks=num;
+				brickList= new ArrayList <Brick>();
+				for(var i=0; i < numBricks; i++)
+				{
+					brickList.add(new Brick(random(windowWidth), random(border, windowHeight - border - floor)));
+					
+				}
+			}
+			void drawBricks()
+			{
+				for (var i=0;i<brickList.size();i++)
+				{
+					brickList.get(i).drawBrick();
+					
+				}
+				
+			}
+			
+			
+		}
+		class Mike
+		{
+			var size;
+			var x;
+			var y;
+			
+			Mike(xp,yp,diameter)
+			{
+				size=diameter;
+				x=xp;
+				y=yp;
+				
+			}
+			
+			var change = 2; 
+			void drawMike()
+			{
+				fill(178,246,99);
+				
+				ellipse(x,y,size,size);
+				stroke(0,0,0); 
+				strokeWeight(1);
+				fill(255,255,255);
+				
+				ellipse(x,y-size/4,size/12*5,size/12*5);
+				fill(0,204,153);
+				strokeWeight(2.5);
+				ellipse(x,y-size/4,size/6,size/6);//eye
+				
+				fill(178,246,99);
+				noStroke();
+				rect(x-size/4, y+size/4 - change, size/11, size/4*3, size);//leg
+				rect(x+size/6, y+size/4 + change, size/11, size/4*3, size);
+				
+				fill(76,76,76);
+				fill(0,0,0);
+				ellipse(x,y-size/4,size/12,size/12);//pupil
+				arc(x,y+size/8,size/2,size/3,0,PI);//mouth
+				stroke(0,0,0);
+				line(x-size/4,y+size/8,x+size/4,y+size/8);//top of mouth
+				
+				noStroke();
+				fill(178,246,99);
+				triangle(x-size/5, y+size/5+size/4*3 - change, x-size/3, y+size/3+size/4*3 - change, x-size/8, y+size/3+size/4*3 - change);//feet
+				triangle(x+size/5, y+size/5+size/4*3 + change, x+size/3, y+size/3+size/4*3 + change, x+size/8, y+size/3+size/4*3 + change);
+				//arms
+				noFill();
+				stroke(178,246,99);
+				strokeWeight(20);
+				arc(x-size/3,y+size/4,size/2,size/6*4, PI/2,PI*4/3);//fix
+				arc(x+size/3,y+size/4,size/2,size/6*4, PI*5/3,PI*5/2);//fix
+				//fill() //toes
+				//ellipse(x-size/3,y+size/3+size/4*3,10,20);
+				
+			}
+			
+			var dir = 2; 
+			void moveMike()
+			{
+				
+				
+				if(mouseX>x-20)
+				{
+					x+=2;
+					num=1;
+		
+				}
+				else if(mouseX<x-20)
+				{
+					x-=2;
+					num= -1;
+					
+				}
+				else{
+				num= 0;
+				
+				change = 0; 
+				}
+				
+				if(change > 10 || change < -10){
+					dir*= -1;
+				}
+				
+				change += dir; 
+				
+				
+			}
+		}
+		class Cart
+		{
+			var x; var y; 
+			var width; var height;  
+			var speed = 3; 
+			var tank;
+			
+			Cart(xc, yc, w, h){
+				x = xc; 
+				y = yc; 
+				width = w; 
+				height = h; 
+				tank= new Tank(x + width/2, y-height/3,width/5, height);
+			}
+			
+			var getX(){
+				return x;
+			}
+			var ran= random(3);
+			void drawCart(){
+				for(var i = 0; i < ran; i++){
+					var tank = new Tank(x + (width/5 + 2) * (i+1) , y-height/3, width/5, height);
+					tank.drawTank(x + (width/5 + 2) * (i+1), y-height/3);
+				}
+				//tank.drawTank(x+width/2, y-height/3 );
+				fill(133, 173, 255);
+				noStroke(); 
+				quad(x, y, x + width, y, x +width - width/4, y + height, x + width/4, y + height);
+				
+				fill(0,0,0);
+				ellipse(x + width/3, y + height, height/6, height/6);
+				ellipse(x + width - width/3, y + height, height/6, height/6);
+				
+				
+				
+				x+=speed; 
+			}
+			
+		}
+		
+		class CartList{
+		
+			var level;
+			var w; var h;
+			ArrayList carts;
+			var amt; 			
+			
+			CartList(amount, l, width, height){
+				h = height; 
+				w = width;
+				amt = amount; 
+				level = l;
+				carts = new ArrayList <Cart> (); 
+				
+				//var r = random(2, 10);
+				for(var i = 0; i < amt; i++){
+					carts.add(new Cart(i * (w + 30), level, w, h));
+				}
+			}
+			
+			void drawCarts(){
+			
+				for(var i = 0; i < carts.size(); i++){
+					carts.get(i).drawCart();
+					if(carts.get(i).getX() > windowWidth){
+						carts.remove(i);
+						carts.add(new Cart(-1 * w, level, w, h));
+						i--; 
+					}
+					
+				}
+				
+				
+			
+			}
+		
+		}
+		class Tank
+		{
+			var height;
+			var width;
+			var x;
+			var y;
+			Tank(X,Y,w,h)
+			{
+				height=h;
+				width=w;
+				x=X;
+				y=Y;
+			}
+			void drawTank(X,Y)
+			{
+				noStroke();
+				fill(255,255,102);
+				rect(X, Y, width,height,20);
+				stroke(0,0,0);
+				strokeWeight(1);
+				line(X,Y+height/6,X+width,Y+height/6);
+				
+			}
+		}
+		
+		
+		</script>
+	</head>
+	<body>
+		<canvas id="mycanvas"></canvas>
+	</body>
+</html>
+
