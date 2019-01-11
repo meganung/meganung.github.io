@@ -1,9 +1,9 @@
 {
-  "main.css": "/static/css/main.ea54be13.chunk.css",
-  "main.js": "/static/js/main.43d82ef0.chunk.js",
-  "main.js.map": "/static/js/main.43d82ef0.chunk.js.map",
-  "static/js/1.28e33faf.chunk.js": "/static/js/1.28e33faf.chunk.js",
-  "static/js/1.28e33faf.chunk.js.map": "/static/js/1.28e33faf.chunk.js.map",
+  "main.css": "/static/css/main.2628227a.chunk.css",
+  "main.js": "/static/js/main.f9b7ccae.chunk.js",
+  "main.js.map": "/static/js/main.f9b7ccae.chunk.js.map",
+  "static/js/1.64a587c4.chunk.js": "/static/js/1.64a587c4.chunk.js",
+  "static/js/1.64a587c4.chunk.js.map": "/static/js/1.64a587c4.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
   "static/media/prof1.jpeg": "/static/media/prof1.41135ab2.jpeg",
@@ -14,8 +14,8 @@
   "static/media/spotus.png": "/static/media/spotus.1e9c8710.png",
   "static/media/resq.png": "/static/media/resq.1673932b.png",
   "static/media/prof2.jpeg": "/static/media/prof2.72ab382e.jpeg",
-  "static/css/main.ea54be13.chunk.css.map": "/static/css/main.ea54be13.chunk.css.map",
+  "static/css/main.2628227a.chunk.css.map": "/static/css/main.2628227a.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.fa861ae2d15e0659f372fd87f8e63ec1.js": "/precache-manifest.fa861ae2d15e0659f372fd87f8e63ec1.js",
+  "precache-manifest.733d0e77e0b2ba8a82407fa534b4afd9.js": "/precache-manifest.733d0e77e0b2ba8a82407fa534b4afd9.js",
   "service-worker.js": "/service-worker.js"
 }
