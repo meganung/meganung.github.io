@@ -52,7 +52,7 @@ self.__precacheManifest = [
     "url": "/static/media/picit.73bcb6af.jpg"
   },
   {
-    "revision": "4142376f1c9d766fd3f9674474052590",
+    "revision": "65ca44d223852cf80b653ceea534df3b",
     "url": "/index.html"
   }
 ];
