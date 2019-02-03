@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "revision": "8daa0e8a157eff6dae61b56bc255f78a",
-    "url": "/static/media/gpsapp.8daa0e8a.png"
+    "revision": "09937616cb1d98c84ea91c8cf653952e",
+    "url": "/static/media/skeeball.09937616.png"
   },
   {
-    "revision": "cf789d54fb9bb7106bfe",
-    "url": "/static/css/main.b8bd9942.chunk.css"
+    "revision": "faf4d66ab6ac5d6a32d0",
+    "url": "/static/css/main.7d5b71b4.chunk.css"
   },
   {
-    "revision": "19d1078288612adcbc61",
-    "url": "/static/js/1.19d10782.chunk.js"
+    "revision": "772a7ca0c436d179e071",
+    "url": "/static/js/1.772a7ca0.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -24,16 +24,8 @@ self.__precacheManifest = [
     "url": "/static/media/prof2.72ab382e.jpeg"
   },
   {
-    "revision": "09937616cb1d98c84ea91c8cf653952e",
-    "url": "/static/media/skeeball.09937616.png"
-  },
-  {
-    "revision": "cf789d54fb9bb7106bfe",
-    "url": "/static/js/main.cf789d54.chunk.js"
-  },
-  {
-    "revision": "d0f15be82bcca5f363d6de7fd538b712",
-    "url": "/static/media/weatherapp.d0f15be8.png"
+    "revision": "faf4d66ab6ac5d6a32d0",
+    "url": "/static/js/main.faf4d66a.chunk.js"
   },
   {
     "revision": "26da38c999e5649a9bd571939bdf010a",
@@ -52,7 +44,7 @@ self.__precacheManifest = [
     "url": "/static/media/picit.73bcb6af.jpg"
   },
   {
-    "revision": "65ca44d223852cf80b653ceea534df3b",
+    "revision": "a463c89c0226e2bc03b2e2175ddd44fc",
     "url": "/index.html"
   }
 ];
